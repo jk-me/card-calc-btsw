@@ -39,21 +39,21 @@ class CardForm extends React.Component{
           <tbody>
             <tr>
               <td>Empathy</td>
-              <td> <input type='number' name='empathy' onChange={e => this.props.handler(e)}/> </td>
+              <td> <input type='text' name='empathy' onChange={e => this.props.handler(e)}/> </td>
 
             </tr>
             <tr>
               <td>Passion</td>
-              <td> <input type='number' name='passion' onChange={e => this.props.handler(e)} /> </td>
+              <td> <input type='text' name='passion' onChange={e => this.props.handler(e)} /> </td>
 
             </tr>
             <tr>
               <td>Stamina</td>
-              <td> <input type='number' name='stamina'  onChange={e => this.props.handler(e)}/> </td>
+              <td> <input type='text' name='stamina'  onChange={e => this.props.handler(e)}/> </td>
 
             </tr><tr>
               <td>Wisdom</td>
-              <td> <input type='number' name='wisdom'onChange={e => this.props.handler(e) }/> </td>
+              <td> <input type='text' name='wisdom'onChange={e => this.props.handler(e) }/> </td>
 
             </tr>
           </tbody>
@@ -68,7 +68,7 @@ class CardForm extends React.Component{
         </select>
 
         <div>
-          <button>Calculate</button>
+          <button onClick={this.props.calculate}>Calculate</button>
         </div>
 
       </div>
