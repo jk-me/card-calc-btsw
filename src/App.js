@@ -1,6 +1,5 @@
 import React from 'react';
 import CardForm from './card_form.js'
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
