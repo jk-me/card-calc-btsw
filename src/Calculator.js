@@ -17,17 +17,19 @@ class Calculator extends React.Component{
   }
 
   handleChange = (event) =>{
-    console.log(`${event.name} changed`)
-
+    console.log(`${event.target.name} changed`)
+    this.setState({[event.target.name]:event.target.value})
   }
 
   calculate = () =>{
-
+    
   }
 
   render(){
     return(
-      <CardForm />
+      <CardForm handler={this.handleChange}/>
     )
   }
 }
+
+export default Calculator
