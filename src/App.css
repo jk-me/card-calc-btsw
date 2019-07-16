@@ -39,4 +39,22 @@ table{
 
 table, th, td {
   border: 1px solid black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.wis {
+  background-color: #8ab1f4;
+}
+
+.sta {
+  background-color: #87da76;
+}
+
+.emp {
+  background-color: #e98bad;
+}
+
+.pas {
+  background-color: #f0eb79;
 }

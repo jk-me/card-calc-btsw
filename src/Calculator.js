@@ -39,9 +39,10 @@ class Calculator extends React.Component{
     results['30'][this.state.top]+= (39-23)*29
     results['50'][this.state.top]+= (39-23)*20
     console.log(results)
-    this.setState({results:results})
     this.reslist.push(<ResultsTable2 results={results} />)
-    console.log(this.reslist)
+    this.setState({results:this.reslist.length})
+
+    console.log(this.state)
 
 
   }
