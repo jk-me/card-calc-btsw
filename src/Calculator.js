@@ -3,9 +3,7 @@ import CardForm from './card_form'
 import ResultsTable from './ResultsTable'
 
 class Calculator extends React.Component{
-  constructor(){
-    super()
-    this.state = {
+  state = {
       name: '',
       level: 1,
       member: '',
@@ -16,7 +14,11 @@ class Calculator extends React.Component{
       top:'empathy',
       results:{th:{},fi:{}}
     }
-  }
+
+  nums=['a']
+
+  reslist = [
+  ]
 
   handleChange = (event) =>{
     // console.log(`${event.target.name} changed`)
@@ -38,10 +40,13 @@ class Calculator extends React.Component{
     results.fi[this.state.top]+= (39-23)*20
     console.log(results)
     this.setState({results:results})
-    document.getElementById('calc').innerHTML+= this.renderResults(results)
+    this.reslist.push(<ResultsTable results={results} />)
+    console.log(this.reslist)
 
 
   }
+
+
 
   renderResults = (results) =>{
     return(
@@ -53,7 +58,11 @@ class Calculator extends React.Component{
     return(
       <div id='calc'>
         <CardForm handler={this.handleChange} calculate={this.calculate}/>
-        <ResultsTable results={this.state.results} />
+        {/* <ResultsTable results={this.state.results} /> */}
+        {this.reslist[0]}
+        {this.reslist[1]}
+        {this.reslist[2]}
+
       </div>
 
     )
