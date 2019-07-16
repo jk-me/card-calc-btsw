@@ -23,17 +23,17 @@ const ResultsTable = props =>{
         </tr>
         <tr>
           <td>30</td>
-          <td className='emp'>{props.results.['30'].empathy}</td>
-          <td className='pas'>{props.results.['30'].passion}</td>
-          <td className='sta'>{props.results.['30'].stamina}</td>
-          <td className='pas'>{props.results.['30'].wisdom}</td>
+          <td className='emp'>{props.results['30'].empathy}</td>
+          <td className='pas'>{props.results['30'].passion}</td>
+          <td className='sta'>{props.results['30'].stamina}</td>
+          <td className='wis'>{props.results['30'].wisdom}</td>
         </tr>
         <tr>
           <td>50</td>
-          <td className='emp'>{props.results.['50'].empathy}</td>
-          <td className='pas'>{props.results.['50'].passion}</td>
-          <td className='sta'>{props.results.['50'].stamina}</td>
-          <td className='wis'>{props.results.['50'].wisdom}</td>
+          <td className='emp'>{props.results['50'].empathy}</td>
+          <td className='pas'>{props.results['50'].passion}</td>
+          <td className='sta'>{props.results['50'].stamina}</td>
+          <td className='wis'>{props.results['50'].wisdom}</td>
         </tr>
 
 

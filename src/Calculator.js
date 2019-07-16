@@ -1,6 +1,6 @@
 import React from 'react'
 import CardForm from './card_form'
-import ResultsTable2 from './ResultsTable2'
+import ResultsTable from './ResultsTable'
 
 class Calculator extends React.Component{
   state = {
@@ -39,7 +39,7 @@ class Calculator extends React.Component{
     results['30'][this.state.top]+= (39-23)*29
     results['50'][this.state.top]+= (39-23)*20
     console.log(results)
-    this.reslist.push(<ResultsTable2 results={results} />)
+    this.reslist.push(<ResultsTable results={results} />)
     this.setState({results:this.reslist.length})
 
     console.log(this.state)
@@ -49,9 +49,9 @@ class Calculator extends React.Component{
 
 
 
-  renderResults = (results) =>{
+  renderResults = () =>{
     return(
-      <ResultsTable2 results={results} />
+      this.reslist.map( el => {return el})
     )
   }
 
@@ -59,10 +59,7 @@ class Calculator extends React.Component{
     return(
       <div id='calc'>
         <CardForm handler={this.handleChange} calculate={this.calculate}/>
-        {this.reslist[0]}
-        {this.reslist[1]}
-        {this.reslist[2]}
-
+        {this.renderResults()}
       </div>
 
     )
