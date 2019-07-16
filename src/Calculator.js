@@ -1,6 +1,6 @@
 import React from 'react'
 import CardForm from './card_form'
-import ResultsTable from './ResultsTable'
+import ResultsTable2 from './ResultsTable2'
 
 class Calculator extends React.Component{
   state = {
@@ -12,7 +12,7 @@ class Calculator extends React.Component{
       wisdom: 0,
       stamina:0,
       top:'empathy',
-      results:{th:{},fi:{}}
+      results:{'1':{},'30':{},'50':{}}
     }
 
   nums=['a']
@@ -31,16 +31,16 @@ class Calculator extends React.Component{
     let p = parseInt(this.state.passion)
     let s = parseInt(this.state.stamina)
     let w = parseInt(this.state.wisdom)
-    let results = {
-      th: {empathy: e+= (23*29), passion:p+= (23*29), stamina:s+= (23*29), wisdom:w+= (23*29)},
-      fi: {empathy: e+= (23*20), passion:p+= (23*20), stamina:s+= (23*20), wisdom:w+= (23*20)}
+    let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
-    }
-    results.th[this.state.top]+= (39-23)*29
-    results.fi[this.state.top]+= (39-23)*20
+    results['30'] = {empathy: e+= (23*29), passion:p+= (23*29), stamina:s+= (23*29), wisdom:w+= (23*29)}
+    results['50'] = {empathy: e+= (23*20), passion:p+= (23*20), stamina:s+= (23*20), wisdom:w+= (23*20)}
+
+    results['30'][this.state.top]+= (39-23)*29
+    results['50'][this.state.top]+= (39-23)*20
     console.log(results)
     this.setState({results:results})
-    this.reslist.push(<ResultsTable results={results} />)
+    this.reslist.push(<ResultsTable2 results={results} />)
     console.log(this.reslist)
 
 
@@ -50,7 +50,7 @@ class Calculator extends React.Component{
 
   renderResults = (results) =>{
     return(
-      <ResultsTable results={results} />
+      <ResultsTable2 results={results} />
     )
   }
 
@@ -58,7 +58,6 @@ class Calculator extends React.Component{
     return(
       <div id='calc'>
         <CardForm handler={this.handleChange} calculate={this.calculate}/>
-        {/* <ResultsTable results={this.state.results} /> */}
         {this.reslist[0]}
         {this.reslist[1]}
         {this.reslist[2]}
