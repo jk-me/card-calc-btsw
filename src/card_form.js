@@ -9,12 +9,6 @@ class CardForm extends React.Component{
         <input type='text' name='name' onChange={e => this.props.handler(e)}/>
 
         <div>
-          <label>Level: </label>
-          <input type='number' name='level' onChange={e => this.props.handler(e)}/>
-        </div>
-
-
-        <div>
           <label>Member: </label>
           <select name='member' onChange={e => this.props.handler(e)}>
             <option value='nj'>RM</option>
@@ -27,6 +21,21 @@ class CardForm extends React.Component{
           </select>
         </div>
 
+        <div>
+          <label>Level: </label>
+          <input type='number' name='level' onChange={e => this.props.handler(e)}/>
+        </div>
+
+        <div>
+          <label>Stars: </label>
+          <select name='stars' onChange={e => this.props.handler(e)}>
+            <option value='5'>5</option>
+            <option value='4'>4</option>
+            <option value='3'>3</option>
+            <option value='2'>2</option>
+            <option value='1'>1</option>
+          </select>
+        </div>
 
 
         <table>

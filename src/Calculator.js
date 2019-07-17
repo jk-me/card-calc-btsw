@@ -6,6 +6,7 @@ class Calculator extends React.Component{
   state = {
       name: '',
       level: 1,
+      stars: 5,
       member: '',
       empathy: 0,
       passion: 0,
@@ -21,7 +22,7 @@ class Calculator extends React.Component{
   ]
 
   handleChange = (event) =>{
-    // console.log(`${event.target.name} changed`)
+    console.log(`${event.target.name} changed`)
     this.setState({[event.target.name]:event.target.value})
   }
 
@@ -35,14 +36,19 @@ class Calculator extends React.Component{
     let w = parseInt(this.state.wisdom)
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
+    let starhash ={'3': [23,35] , '4':[26,39] , '5':[30,45]}
+    let mult = starhash[this.state.stars][0]
+    let tmult = starhash[this.state.stars][1]
+
+
     if (lvl !== 1){
       let diff = lvl - 1
       for (const key in results['1']){
         if (key === this.state.top){
-          results['1'][key] -=(diff * 39)
+          results['1'][key] -=(diff * tmult)
         }
         else{
-          results['1'][key] -= (diff*23)
+          results['1'][key] -= (diff * mult)
         }
       }
     }
@@ -52,11 +58,19 @@ class Calculator extends React.Component{
     s = results['1'].stamina
     w = results['1'].wisdom
 
-    results['30'] = {empathy: e+= (23*29), passion:p+= (23*29), stamina:s+= (23*29), wisdom:w+= (23*29)}
-    results['50'] = {empathy: e+= (23*20), passion:p+= (23*20), stamina:s+= (23*20), wisdom:w+= (23*20)}
+    results['30'] = {
+      empathy: e+= (mult*29),
+      passion:p+= (mult*29),
+      stamina:s+= (mult*29),
+      wisdom:w+= (mult*29)}
+    results['50'] = {
+      empathy:e+= (mult*20),
+      passion:p+= (mult*20),
+      stamina:s+= (mult*20),
+      wisdom:w+= (mult*20)}
 
-    results['30'][this.state.top]+= (39-23)*29
-    results['50'][this.state.top]+= (39-23)*49
+    results['30'][this.state.top]+= (tmult-mult)*29
+    results['50'][this.state.top]+= (tmult-mult)*49
     console.log(results)
     this.reslist.push(<ResultsTable results={results} />)
     this.setState({results:this.reslist.length})
@@ -65,7 +79,6 @@ class Calculator extends React.Component{
 
   }
 
-// **************GIT COMMIT -M 'finish calculator fn for any level card'
 
   renderResults = () =>{
     return(
