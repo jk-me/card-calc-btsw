@@ -7,7 +7,7 @@ class Calculator extends React.Component{
       name: '',
       level: 1,
       stars: 5,
-      member: '',
+      member: 'RM',
       empathy: 0,
       passion: 0,
       wisdom: 0,
@@ -16,19 +16,17 @@ class Calculator extends React.Component{
       results:{'1':{},'30':{},'50':{}}
     }
 
-  nums=['a']
 
   reslist = [
   ]
 
   handleChange = (event) =>{
-    console.log(`${event.target.name} changed`)
+    // console.log(`${event.target.name} changed`)
     this.setState({[event.target.name]:event.target.value})
   }
 
   calculate = () =>{
     console.log(this.state)
-    let stats = ['empathy', 'passion', 'stamina','wisdom']
     let lvl = parseInt(this.state.level)
     let e = parseInt(this.state.empathy)
     let p = parseInt(this.state.passion)
@@ -72,7 +70,7 @@ class Calculator extends React.Component{
     results['30'][this.state.top]+= (tmult-mult)*29
     results['50'][this.state.top]+= (tmult-mult)*49
     console.log(results)
-    this.reslist.push(<ResultsTable results={results} />)
+    this.reslist.push(<ResultsTable results={results} card={this.state.name} member={this.state.member}/>)
     this.setState({results:this.reslist.length})
 
     console.log(this.state)

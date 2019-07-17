@@ -11,13 +11,13 @@ class CardForm extends React.Component{
         <div>
           <label>Member: </label>
           <select name='member' onChange={e => this.props.handler(e)}>
-            <option value='nj'>RM</option>
-            <option value='sj'>Jin</option>
-            <option value='yg'>Suga</option>
-            <option value='hs'>J-Hope</option>
-            <option value='jm'>Jimin</option>
-            <option value='th'>V</option>
-            <option value='jk'>Jungkook</option>
+            <option value='RM'>RM</option>
+            <option value='Jin'>Jin</option>
+            <option value='Suga'>Suga</option>
+            <option value='J-Hope'>J-Hope</option>
+            <option value='Jimin'>Jimin</option>
+            <option value='V'>V</option>
+            <option value='Jungkook'>Jungkook</option>
           </select>
         </div>
 
