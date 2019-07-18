@@ -17,8 +17,12 @@ class Calculator extends React.Component{
     }
 
 
-  reslist = [
-  ]
+  reslist = {
+    empathy:[],
+    stamina:[],
+    passion:[],
+    wisdom:[]
+  }
 
   handleChange = (event) =>{
     // console.log(`${event.target.name} changed`)
@@ -70,7 +74,7 @@ class Calculator extends React.Component{
     results['30'][this.state.top]+= (tmult-mult)*29
     results['50'][this.state.top]+= (tmult-mult)*49
     console.log(results)
-    this.reslist.push(<ResultsTable results={results} card={this.state.name} member={this.state.member}/>)
+    this.reslist[this.state.top].push(<ResultsTable results={results} card={this.state.name} member={this.state.member}/>)
     this.setState({results:this.reslist.length})
 
     console.log(this.state)
@@ -78,9 +82,9 @@ class Calculator extends React.Component{
   }
 
 
-  renderResults = () =>{
+  renderResults = (top) =>{
     return(
-      this.reslist.map( el => {return el})
+      this.reslist[top].map( el => {return el})
     )
   }
 
@@ -88,7 +92,23 @@ class Calculator extends React.Component{
     return(
       <div id='calc'>
         <CardForm handler={this.handleChange} calculate={this.calculate}/>
-        {this.renderResults()}
+        <div className='col'>
+          <p>Empathy</p>
+          {this.renderResults('empathy')}
+        </div>
+        <div className='col'>
+          <p>Passion</p>
+          {this.renderResults('passion')}
+        </div>
+        <div className='col'>
+          <p>Stamina</p>
+          {this.renderResults('stamina')}
+        </div>
+        <div className='col'>
+          <p>Wisdom</p>
+          {this.renderResults('wisdom')}
+        </div>
+
       </div>
 
     )

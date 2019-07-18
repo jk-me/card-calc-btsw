@@ -2,7 +2,7 @@ import React from 'react'
 
 const ResultsTable = props =>{
   return(
-    <div>
+    <div className='res'>
       <span>{props.member}: </span><span>{props.card}</span>
 
       <table>
