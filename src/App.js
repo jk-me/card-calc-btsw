@@ -13,7 +13,6 @@ class App extends React.Component{
         <Router>
           <>
             <Route exact path='/' render={()=><Calculator/>} />
-            <Route exact path='/levels' render={ () => <LevelForm />} />
           </>
         </Router>
       </div>
