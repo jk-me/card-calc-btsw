@@ -1,4 +1,6 @@
 import React from 'react'
+import CSVReader from 'react-csv-reader'
+import data from '../main-story.csv'
 
 class LevelForm extends React.Component{
 
@@ -7,38 +9,25 @@ class LevelForm extends React.Component{
   }
 
   fetchCsv() {
-    return fetch('/src/main-story.csv')
-      .then( resp => resp.text())
-      .then( data => console.log(data))
-            // let reader = response.body.getReader();
-            // let decoder = new TextDecoder('utf-8');
-            //
-            // return reader.read().then(function (result) {
-            //     return decoder.decode(result.value);
+    console.log(data)
+    fetch({
+      url: '../main-story.csv',
+      dataType: 'text',
+      success: function(data){
+        console.log(data)
+        // loadStageData(data);
+        // loadStoryData(++i);
+      }
+    });
   }
-    // getData(result) {
-    //     this.setState({data: result.data});
-    // }
-    //
-    // async getCsvData() {
-    //     let csvData = await this.fetchCsv();
-    //
-    //     Papa.parse(csvData, {
-    //         complete: this.getData
-    //     });
-    // }
-    // $.ajax({
-    //   url: 'script/' + storyName[i] + '_story.csv',
-    //   dataType: 'text',
-    //   success: function(data){
-    //     loadStageData(data);
-    //     loadStoryData(++i);
-    //   }
-    // });
 
   render(){
     return(
-      <p>LEVEL FORM</p>
+      <div>
+
+        <p>LEVEL FORM</p>
+      </div>
+
     )
   }
 }
