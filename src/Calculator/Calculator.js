@@ -74,7 +74,7 @@ class Calculator extends React.Component{
     results['30'][this.state.top]+= (tmult-mult)*29
     results['50'][this.state.top]+= (tmult-mult)*49
     console.log(results)
-    this.reslist[this.state.top].push(<ResultsTable results={results} card={this.state.name} member={this.state.member}/>)
+    this.reslist[this.state.top].push(<ResultsTable results={results} card={this.state.name} member={this.state.member} stars = {this.state.stars}/>)
     this.setState({results:this.reslist.length})
 
     console.log(this.state)

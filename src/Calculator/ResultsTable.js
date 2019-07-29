@@ -3,7 +3,7 @@ import React from 'react'
 const ResultsTable = props =>{
   return(
     <div className='res'>
-      <span>{props.member}: </span><span>{props.card}</span>
+      <span>{props.stars} &#9733; {props.member}: {props.card}</span>
 
       <table>
         <thead>
