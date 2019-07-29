@@ -1,6 +1,6 @@
 import React from 'react'
-import CSVReader from 'react-csv-reader'
-import data from '../main-story.csv'
+import main_story from '../main-story.csv'
+import Papa from 'papaparse'
 
 class LevelForm extends React.Component{
 
@@ -9,16 +9,17 @@ class LevelForm extends React.Component{
   }
 
   fetchCsv() {
-    console.log(data)
-    fetch({
-      url: '../main-story.csv',
-      dataType: 'text',
-      success: function(data){
-        console.log(data)
-        // loadStageData(data);
-        // loadStoryData(++i);
+    const csv = require('../cardbasestats.csv')
+
+    Papa.parse(csv, {
+        // header: true,
+        download: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          console.log(results.data[1]);
+        }
       }
-    });
+    )
   }
 
   render(){
