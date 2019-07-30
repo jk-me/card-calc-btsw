@@ -22,7 +22,7 @@ class CardNameForm extends React.Component{
         </div>
 
         <button onClick={this.props.calculate}>Calculate</button>
-        
+
       </div>
     )
   }

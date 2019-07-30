@@ -1,20 +1,13 @@
 import React from 'react'
-import main_story from '../main-story.csv'
+import card_stats from '../cardbasestats.csv'
 import Papa from 'papaparse'
 import CardNameForm from './CardNameForm'
 import ResultsTable from '../Calculator/ResultsTable'
 
 class ByName extends React.Component{
   state = {
-      name: '',
-      // level: 1,
-      // stars: 5,
-      // member: 'RM',
-      // empathy: 0,
-      // passion: 0,
-      // wisdom: 0,
-      // stamina:0,
-      // top:'empathy',
+      name: "You're Quite Handsome",
+      position:[0,1],
       results:0
   }
 
@@ -25,17 +18,15 @@ class ByName extends React.Component{
     this.fetchCsv()
   }
 
-  card_data = []
+  card_data = {data:[]}
 
   fetchCsv() {
-    const csv = require('../cardbasestats.csv')
-    Papa.parse(csv, {
-        // header: true,
+    Papa.parse(card_stats, {
         download: true,
-        skipEmptyLines: true,
         complete: function(results) {
-          this.card_data = results.data
-          console.log(this.card_data);
+          this.card_data.data = results.data
+          console.log(this.card_data.data);
+          //names at index 1,9,17,25,33,41,49
         }
     })
   }
@@ -46,37 +37,39 @@ class ByName extends React.Component{
 
   calculate = () =>{
     console.log(this.state)
-    let lvl = parseInt(this.state.level)
-    let e = parseInt(this.state.empathy)
-    let p = parseInt(this.state.passion)
-    let s = parseInt(this.state.stamina)
-    let w = parseInt(this.state.wisdom)
+    console.log(this.card_data.data)
+
+    // let lvl = parseInt(this.state.level) is 1
+    let i = this.state.position
+    let top = this.card_data[i[0]][i[1]-1]
+    let e = parseInt(this.card_data[i[0]][i[1]+1])
+    let p = parseInt(this.card_data[i[0]][i[1]+2])
+    let s = parseInt(this.card_data[i[0]][i[1]+3])
+    let w = parseInt(this.card_data[i[0]][i[1]+4])
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
     let starhash ={'3': [23,35] , '4':[26,39] , '5':[30,45]}
-    let mult = starhash[this.state.stars][0]
-    let tmult = starhash[this.state.stars][1]
-
-    e = results['1'].empathy
-    p = results['1'].passion
-    s = results['1'].stamina
-    w = results['1'].wisdom
+    let mult
+    if (i[0] < 10){
+      mult = [30,45]
+    }
 
     results['30'] = {
-      empathy: e+= (mult*29),
-      passion:p+= (mult*29),
-      stamina:s+= (mult*29),
-      wisdom:w+= (mult*29)}
+      empathy: e+= (mult[0][0]*29),
+      passion:p+= (mult[0][0]*29),
+      stamina:s+= (mult[0][0]*29),
+      wisdom:w+= (mult[0][0]*29)}
     results['50'] = {
-      empathy:e+= (mult*20),
-      passion:p+= (mult*20),
-      stamina:s+= (mult*20),
-      wisdom:w+= (mult*20)}
+      empathy:e+= (mult[0]*20),
+      passion:p+= (mult[0]*20),
+      stamina:s+= (mult[0]*20),
+      wisdom:w+= (mult[0]*20)}
 
-    results['30'][this.state.top]+= (tmult-mult)*29
-    results['50'][this.state.top]+= (tmult-mult)*49
+    results['30'][top]+= (mult[1]-mult[0])*29
+    results['50'][top]+= (mult[1]-mult[0])*49
     console.log(results)
-    this.reslist[this.state.top].push(<ResultsTable results={results} card={this.state.name} member={this.state.member} stars = {this.state.stars}/>)
+    this.reslist[top].push(<ResultsTable results={results} card={this.state.name} />)
+    // member={this.state.member} stars = {this.state.stars}
     this.setState({results:this.reslist.length})
 
     console.log(this.state)
@@ -93,6 +86,7 @@ class ByName extends React.Component{
     return(
       <div id='calc'>
         <CardNameForm handler={this.handleChange} calculate={this.calculate}/>
+        {/* {this.card_data} */}
         <div className='col'>
           <p>Empathy</p>
           {this.renderResults('empathy')}
