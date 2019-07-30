@@ -7,8 +7,9 @@ import ResultsTable from '../Calculator/ResultsTable'
 class ByName extends React.Component{
   state = {
       name: "You're Quite Handsome",
-      position:[1,1],
-      results:0
+      position:[1,0,1],
+      results:0,
+      card_data:[]
   }
 
 
@@ -25,14 +26,11 @@ class ByName extends React.Component{
         download: true,
         complete: (results) => {
           this.card_data = results.data
-          console.log(this.card_data);
+          this.setState({card_data: results.data})
+          // console.log(this.card_data);
           //names at index 1,9,17,25,33,41,49
         }
     })
-  }
-
-  setCardData = () =>{
-
   }
 
   handleChange = (event) =>{
@@ -40,17 +38,14 @@ class ByName extends React.Component{
   }
 
   calculate = () =>{
-    console.log(this.state)
     console.log(this.card_data)
+    let i = this.state.position  //BUG position is not array from form
+    let top = this.card_data[i[0]][(i[2]-1)]
 
-    // let lvl = parseInt(this.state.level) is 1
-    let i = this.state.position
-    let top = this.card_data[i[0]][i[1]-1]
-    console.log(top)
-    let e = parseInt(this.card_data[i[0]][i[1]+1])
-    let p = parseInt(this.card_data[i[0]][i[1]+2])
-    let s = parseInt(this.card_data[i[0]][i[1]+3])
-    let w = parseInt(this.card_data[i[0]][i[1]+4])
+    let e = parseInt(this.card_data[i[0]][i[2]+1])
+    let p = parseInt(this.card_data[i[0]][i[2]+2])
+    let s = parseInt(this.card_data[i[0]][i[2]+3])
+    let w = parseInt(this.card_data[i[0]][i[2]+4])
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
     // let starhash ={'3': [23,35] , '4':[26,39] , '5':[30,45]}
@@ -58,7 +53,6 @@ class ByName extends React.Component{
     if (i[0] < 10){
       mult = [30,45]
     }
-    console.log(mult)
     results['30'] = {
       empathy: e+= (mult[0]*29),
       passion: p+= (mult[0]*29),
@@ -87,10 +81,15 @@ class ByName extends React.Component{
     )
   }
 
+  returnData = () =>{
+    return this.state.card_data
+  }
+
   render(){
     return(
       <div id='calc'>
-        <CardNameForm handler={this.handleChange} calculate={this.calculate}/>
+        <CardNameForm handler={this.handleChange} calculate={this.calculate} data={this.state.card_data}/>
+
         <div className='col'>
           <p>Empathy</p>
           {this.renderResults('empathy')}
