@@ -7,7 +7,7 @@ import ResultsTable from '../Calculator/ResultsTable'
 class ByName extends React.Component{
   state = {
       name: "You're Quite Handsome",
-      position:[0,1],
+      position:[1,1],
       results:0
   }
 
@@ -18,17 +18,21 @@ class ByName extends React.Component{
     this.fetchCsv()
   }
 
-  card_data = {data:[]}
+  card_data = []
 
-  fetchCsv() {
+  fetchCsv = () => {
     Papa.parse(card_stats, {
         download: true,
-        complete: function(results) {
-          this.card_data.data = results.data
-          console.log(this.card_data.data);
+        complete: (results) => {
+          this.card_data = results.data
+          console.log(this.card_data);
           //names at index 1,9,17,25,33,41,49
         }
     })
+  }
+
+  setCardData = () =>{
+
   }
 
   handleChange = (event) =>{
@@ -37,33 +41,34 @@ class ByName extends React.Component{
 
   calculate = () =>{
     console.log(this.state)
-    console.log(this.card_data.data)
+    console.log(this.card_data)
 
     // let lvl = parseInt(this.state.level) is 1
     let i = this.state.position
     let top = this.card_data[i[0]][i[1]-1]
+    console.log(top)
     let e = parseInt(this.card_data[i[0]][i[1]+1])
     let p = parseInt(this.card_data[i[0]][i[1]+2])
     let s = parseInt(this.card_data[i[0]][i[1]+3])
     let w = parseInt(this.card_data[i[0]][i[1]+4])
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
-    let starhash ={'3': [23,35] , '4':[26,39] , '5':[30,45]}
+    // let starhash ={'3': [23,35] , '4':[26,39] , '5':[30,45]}
     let mult
     if (i[0] < 10){
       mult = [30,45]
     }
-
+    console.log(mult)
     results['30'] = {
-      empathy: e+= (mult[0][0]*29),
-      passion:p+= (mult[0][0]*29),
-      stamina:s+= (mult[0][0]*29),
-      wisdom:w+= (mult[0][0]*29)}
+      empathy: e+= (mult[0]*29),
+      passion: p+= (mult[0]*29),
+      stamina: s+= (mult[0]*29),
+      wisdom: w+= (mult[0]*29)}
     results['50'] = {
-      empathy:e+= (mult[0]*20),
-      passion:p+= (mult[0]*20),
-      stamina:s+= (mult[0]*20),
-      wisdom:w+= (mult[0]*20)}
+      empathy: e+= (mult[0]*20),
+      passion: p+= (mult[0]*20),
+      stamina: s+= (mult[0]*20),
+      wisdom: w+= (mult[0]*20)}
 
     results['30'][top]+= (mult[1]-mult[0])*29
     results['50'][top]+= (mult[1]-mult[0])*49
@@ -86,7 +91,6 @@ class ByName extends React.Component{
     return(
       <div id='calc'>
         <CardNameForm handler={this.handleChange} calculate={this.calculate}/>
-        {/* {this.card_data} */}
         <div className='col'>
           <p>Empathy</p>
           {this.renderResults('empathy')}
