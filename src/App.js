@@ -4,6 +4,7 @@ import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Calculator from './Calculator/Calculator.js'
 import LevelForm from './LevelCalc/LevelForm.js'
+import ByName from './ByName/Container.js'
 
 // function App() {
 class App extends React.Component{
@@ -13,6 +14,8 @@ class App extends React.Component{
         <Router>
           <>
             <Route exact path='/' render={()=><Calculator/>} />
+            <Route exact path='/levels' render={ () => <LevelForm />} />
+            <Route exact path='/byname' render={ () => <ByName />} />
           </>
         </Router>
       </div>

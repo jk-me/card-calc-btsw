@@ -1,20 +1,21 @@
 import React from 'react'
-import CardForm from './card_form'
-import ResultsTable from './ResultsTable'
+import ResultsTable from '../Calculator/ResultsTable'
+import main_story from '../main-story.csv'
+import Papa from 'papaparse'
 
-class Calculator extends React.Component{
+class ByName extends React.Component{
   state = {
       name: '',
-      level: 1,
-      stars: 5,
-      member: 'RM',
-      empathy: 0,
-      passion: 0,
-      wisdom: 0,
-      stamina:0,
-      top:'empathy',
+      // level: 1,
+      // stars: 5,
+      // member: 'RM',
+      // empathy: 0,
+      // passion: 0,
+      // wisdom: 0,
+      // stamina:0,
+      // top:'empathy',
       results:0
-    }
+  }
 
 
   reslist = {
@@ -22,6 +23,27 @@ class Calculator extends React.Component{
     stamina:[],
     passion:[],
     wisdom:[]
+  }
+
+  componentDidMount(){
+    this.fetchCsv()
+  }
+
+  acsv =[]
+
+  fetchCsv() {
+    const csv = require('../cardbasestats.csv')
+
+    Papa.parse(csv, {
+        // header: true,
+        download: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          this.acsv = results.data
+          console.log(this.acsv);
+        }
+      }
+    )
   }
 
   handleChange = (event) =>{
@@ -41,19 +63,6 @@ class Calculator extends React.Component{
     let starhash ={'3': [23,35] , '4':[26,39] , '5':[30,45]}
     let mult = starhash[this.state.stars][0]
     let tmult = starhash[this.state.stars][1]
-
-
-    if (lvl !== 1){
-      let diff = lvl - 1
-      for (const key in results['1']){
-        if (key === this.state.top){
-          results['1'][key] -=(diff * tmult)
-        }
-        else{
-          results['1'][key] -= (diff * mult)
-        }
-      }
-    }
 
     e = results['1'].empathy
     p = results['1'].passion
@@ -91,7 +100,6 @@ class Calculator extends React.Component{
   render(){
     return(
       <div id='calc'>
-        <CardForm handler={this.handleChange} calculate={this.calculate}/>
         <div className='col'>
           <p>Empathy</p>
           {this.renderResults('empathy')}
@@ -115,4 +123,4 @@ class Calculator extends React.Component{
   }
 }
 
-export default Calculator
+export default ByName
