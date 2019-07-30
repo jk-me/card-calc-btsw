@@ -1,7 +1,8 @@
 import React from 'react'
-import ResultsTable from '../Calculator/ResultsTable'
 import main_story from '../main-story.csv'
 import Papa from 'papaparse'
+import CardNameForm from './CardNameForm'
+import ResultsTable from '../Calculator/ResultsTable'
 
 class ByName extends React.Component{
   state = {
@@ -18,36 +19,28 @@ class ByName extends React.Component{
   }
 
 
-  reslist = {
-    empathy:[],
-    stamina:[],
-    passion:[],
-    wisdom:[]
-  }
+  reslist = { empathy:[], stamina:[], passion:[], wisdom:[] }
 
   componentDidMount(){
     this.fetchCsv()
   }
 
-  acsv =[]
+  card_data = []
 
   fetchCsv() {
     const csv = require('../cardbasestats.csv')
-
     Papa.parse(csv, {
         // header: true,
         download: true,
         skipEmptyLines: true,
         complete: function(results) {
-          this.acsv = results.data
-          console.log(this.acsv);
+          this.card_data = results.data
+          console.log(this.card_data);
         }
-      }
-    )
+    })
   }
 
   handleChange = (event) =>{
-    // console.log(`${event.target.name} changed`)
     this.setState({[event.target.name]:event.target.value})
   }
 
@@ -90,7 +83,6 @@ class ByName extends React.Component{
 
   }
 
-
   renderResults = (top) =>{
     return(
       this.reslist[top].map( el => {return el})
@@ -100,6 +92,7 @@ class ByName extends React.Component{
   render(){
     return(
       <div id='calc'>
+        <CardNameForm handler={this.handleChange} calculate={this.calculate}/>
         <div className='col'>
           <p>Empathy</p>
           {this.renderResults('empathy')}
