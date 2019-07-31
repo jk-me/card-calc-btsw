@@ -9,9 +9,7 @@ class CardNameForm extends React.PureComponent{
 
   extractNames = () =>{
     let alldata = this.props.data
-    // console.log(alldata)
     if (alldata.length > 0){
-      // console.log(alldata)
       for ( let i = 1 ; i <10 ; i++){
         this.data[alldata[i][1]] = [i, 1]
         this.data[alldata[i][9]] = [i, 9]
@@ -22,16 +20,14 @@ class CardNameForm extends React.PureComponent{
         this.data[alldata[i][49]] = [i, 49]
       }
     }
-    // console.log(this.data)
   }
 
   renderOptions = () =>{
     this.extractNames()
-    // console.log(this.data)
     let options =[]
     Object.keys(this.data).map( (key) => {
       // console.log(this.data[key])
-      options.push(<option value={[this.data[key]]}>{key}</option>)
+      options.push(<option value={this.data[key]}>{key}</option>)
     })
     return options
   }

@@ -7,7 +7,7 @@ import ResultsTable from '../Calculator/ResultsTable'
 class ByName extends React.Component{
   state = {
       name: "You're Quite Handsome",
-      position:[1,0,1],
+      position:'1,1',
       results:0,
       card_data:[]
   }
@@ -34,24 +34,29 @@ class ByName extends React.Component{
   }
 
   handleChange = (event) =>{
-    this.setState({[event.target.name]:event.target.value})
+    this.setState({
+      [event.target.name]:event.target.value,
+    })
   }
 
   calculate = () =>{
-    console.log(this.card_data)
-    let i = this.state.position  //BUG position is not array from form
-    let top = this.card_data[i[0]][(i[2]-1)]
+    let i = this.state.position.split(',')  //BUG position is not array from form
+    i = [parseInt(i[0]), parseInt(i[1])]
+    console.log(i)
+    let top = this.card_data[i[0]][(i[1]-1)]
 
-    let e = parseInt(this.card_data[i[0]][i[2]+1])
-    let p = parseInt(this.card_data[i[0]][i[2]+2])
-    let s = parseInt(this.card_data[i[0]][i[2]+3])
-    let w = parseInt(this.card_data[i[0]][i[2]+4])
+    let e = parseInt(this.card_data[i[0]][i[1]+1])
+    let p = parseInt(this.card_data[i[0]][i[1]+2])
+    let s = parseInt(this.card_data[i[0]][i[1]+3])
+    let w = parseInt(this.card_data[i[0]][i[1]+4])
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
-    // let starhash ={'3': [23,35] , '4':[26,39] , '5':[30,45]}
-    let mult
+    let memberhash ={'1': 'Jin' , '9':'Suga' , '17':'J-Hope', '25':'RM', '33':'Jimin', '41':'V', '49':'Jungkook'}
+    let mult, stars, member
     if (i[0] < 10){
       mult = [30,45]
+      stars = 5
+      member = memberhash[i[1]]
     }
     results['30'] = {
       empathy: e+= (mult[0]*29),
@@ -67,8 +72,7 @@ class ByName extends React.Component{
     results['30'][top]+= (mult[1]-mult[0])*29
     results['50'][top]+= (mult[1]-mult[0])*49
     console.log(results)
-    this.reslist[top].push(<ResultsTable results={results} card={this.state.name} />)
-    // member={this.state.member} stars = {this.state.stars}
+    this.reslist[top].push(<ResultsTable results={results} card={this.card_data[i[0]][i[1]]} stars = {stars} member={member}/>)
     this.setState({results:this.reslist.length})
 
     console.log(this.state)
