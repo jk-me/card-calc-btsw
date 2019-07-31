@@ -51,12 +51,21 @@ class ByName extends React.Component{
     let w = parseInt(this.card_data[i[0]][i[1]+4])
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
-    let memberhash ={'1': 'Jin' , '9':'Suga' , '17':'J-Hope', '25':'RM', '33':'Jimin', '41':'V', '49':'Jungkook'}
-    let mult, stars, member
+    const memberhash ={'1': 'Jin' , '9':'Suga' , '17':'J-Hope', '25':'RM', '33':'Jimin', '41':'V', '49':'Jungkook'}
+
+    let mult, stars
+    let member = memberhash[i[1]]
     if (i[0] < 10){
       mult = [30,45]
       stars = 5
-      member = memberhash[i[1]]
+    }
+    else if (i[0] < 25){
+      mult =[26,39]
+      stars = 4
+    }
+    else if (i[0] < 43){
+      mult =[23,35]
+      stars = 3
     }
     results['30'] = {
       empathy: e+= (mult[0]*29),
