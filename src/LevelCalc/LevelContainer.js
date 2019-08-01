@@ -13,12 +13,19 @@ class ByName extends React.Component{
       name: "You're Quite Handsome",
       position:'1,1',
       levelrow: 65,  //level 6-1
+      level:{
+        total: 0,
+        empathy: 50,
+        passion: 50,
+        stamina: 200,
+        wisdom: 150,
+      },
       results:0,
       card_data:[],
       story_data:[]
   }
 
-  reslist = { empathy:[], stamina:[], passion:[], wisdom:[] }
+  reslist = []
 
   componentDidMount(){
     this.fetchCardData()
@@ -41,15 +48,22 @@ class ByName extends React.Component{
         download: true,
         complete: (results) => {
           this.setState({story_data: results.data})
-          console.log(this.state.story_data);
+          // console.log(this.state.story_data);
         }
       }
     )
   }
 
-  handleChange = (event) =>{
+  handleLevelChange = (event) =>{
+    console.log(this.state.story_data[event.target.value])
     this.setState({
-      [event.target.name]:event.target.value,
+      [event.target.name]:event.target.value, //levelrow
+      level: {
+        empathy: this.state.story_data[event.target.value][4],
+        passion: this.state.story_data[event.target.value][5],
+        stamina: this.state.story_data[event.target.value][6],
+        wisdom: this.state.story_data[event.target.value][7],
+      }
     })
   }
 
@@ -103,9 +117,9 @@ class ByName extends React.Component{
 
   }
 
-  renderResults = (top) =>{
+  renderResults = () =>{
     return(
-      this.reslist[top].map( el => {return el})
+      this.reslist.map( el => {return el})
     )
   }
 
@@ -113,26 +127,11 @@ class ByName extends React.Component{
     return(
       <div>
         <h4>Calculate level 30 and 50 stats for any 3-5 star card.</h4>
-        <LevelForm data={this.state.story_data} handler={this.handleChange}/>
-        <CardNameForm handler={this.handleChange} calculate={this.calculate} data={this.state.card_data}/>
+        <LevelForm data={this.state.story_data} handler={this.handleLevelChange}/>
+        <CardNameForm handler={this.handleChange} calculate={this.calculate} data={this.state.card_data} level='true'/>
         <p>Tip: Select input field and start typing name of card</p>
 
-        <div className='col'>
-          <p>Empathy</p>
-          {this.renderResults('empathy')}
-        </div>
-        <div className='col'>
-          <p>Passion</p>
-          {this.renderResults('passion')}
-        </div>
-        <div className='col'>
-          <p>Stamina</p>
-          {this.renderResults('stamina')}
-        </div>
-        <div className='col'>
-          <p>Wisdom</p>
-          {this.renderResults('wisdom')}
-        </div>
+
 
       </div>
 
