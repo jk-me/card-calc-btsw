@@ -42,12 +42,12 @@ class ByName extends React.Component{
     let i = this.state.position.split(',')
     i = [parseInt(i[0]), parseInt(i[1])]
     // console.log(i)  //[1,0]
-    let top = this.card_data[i[0]][(i[1]-1)]
+    let top = this.state.card_data[i[0]][(i[1]-1)]
 
-    let e = parseInt(this.card_data[i[0]][i[1]+1])
-    let p = parseInt(this.card_data[i[0]][i[1]+2])
-    let s = parseInt(this.card_data[i[0]][i[1]+3])
-    let w = parseInt(this.card_data[i[0]][i[1]+4])
+    let e = parseInt(this.state.card_data[i[0]][i[1]+1])
+    let p = parseInt(this.state.card_data[i[0]][i[1]+2])
+    let s = parseInt(this.state.card_data[i[0]][i[1]+3])
+    let w = parseInt(this.state.card_data[i[0]][i[1]+4])
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
     //names at index 1,9,17,25,33,41,49
@@ -81,7 +81,7 @@ class ByName extends React.Component{
     results['30'][top]+= (mult[1]-mult[0])*29
     results['50'][top]+= (mult[1]-mult[0])*49
     // console.log(results)
-    this.reslist[top].push(<ResultsTable results={results} card={this.card_data[i[0]][i[1]]} stars = {stars} member={member}/>)
+    this.reslist[top].push(<ResultsTable results={results} card={this.state.card_data[i[0]][i[1]]} stars = {stars} member={member}/>)
     this.setState({results:this.state.results+1})
 
     // console.log(this.state)

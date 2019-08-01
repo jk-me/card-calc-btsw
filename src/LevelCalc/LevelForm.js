@@ -9,9 +9,7 @@ class LevelForm extends React.Component{
   }
 
   fetchCsv() {
-    const csv = require('../cardbasestats.csv')
-
-    Papa.parse(csv, {
+    Papa.parse(main_story, {
         // header: true,
         download: true,
         skipEmptyLines: true,

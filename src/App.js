@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 // import ReactDOM from 'react-dom'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import NavBar from './NavBar.js'
 import Calculator from './Calculator/Calculator.js'
 import LevelForm from './LevelCalc/LevelForm.js'
 import ByName from './ByName/Container.js'
@@ -11,8 +12,10 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
+
         <Router>
           <>
+            <NavBar />
             <Route exact path='/oldcalc' render={()=><Calculator/>} />
             <Route exact path='/levels' render={ () => <LevelForm />} />
             <Route exact path='/' render={ () => <ByName />} />
