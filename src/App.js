@@ -17,7 +17,7 @@ class App extends React.Component{
           <>
             <NavBar />
             <Route exact path='/oldcalc' render={()=><Calculator/>} />
-            <Route exact path='/levels' render={ () => <LevelContainer />} />
+            {/* <Route exact path='/levels' render={ () => <LevelContainer />} /> */}
             <Route exact path='/' render={ () => <ByName />} />
             <Route exact path='/about' render={ () => <About />} />
 

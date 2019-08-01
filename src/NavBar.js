@@ -5,7 +5,7 @@ const NavBar = () =>{
   return(
     <>
       <span><NavLink to='/' exact >Home</NavLink> </span>
-      <span><NavLink to='/levels' exact>Levels</NavLink> </span>
+      {/* <span><NavLink to='/levels' exact>Levels</NavLink> </span> */}
       <span><NavLink to='/oldcalc' exact>Old Calculator</NavLink> </span>
       <span><NavLink to='/about' exact >About</NavLink> </span>
 
