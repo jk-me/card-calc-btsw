@@ -13,9 +13,9 @@ class App extends React.Component{
       <div className="App">
         <Router>
           <>
-            <Route exact path='/' render={()=><Calculator/>} />
+            <Route exact path='/oldcalc' render={()=><Calculator/>} />
             <Route exact path='/levels' render={ () => <LevelForm />} />
-            <Route exact path='/byname' render={ () => <ByName />} />
+            <Route exact path='/' render={ () => <ByName />} />
           </>
         </Router>
       </div>
