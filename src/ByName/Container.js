@@ -19,16 +19,15 @@ class ByName extends React.Component{
     this.fetchCsv()
   }
 
-  card_data = []
+  // card_data = []
 
   fetchCsv = () => {
     Papa.parse(card_stats, {
         download: true,
         complete: (results) => {
-          this.card_data = results.data
-          this.setState({card_data: results.data})
+          // this.card_data = results.data
           // console.log(this.card_data);
-          //names at index 1,9,17,25,33,41,49
+          this.setState({card_data: results.data})
         }
     })
   }
@@ -40,9 +39,9 @@ class ByName extends React.Component{
   }
 
   calculate = () =>{
-    let i = this.state.position.split(',')  //BUG position is not array from form
+    let i = this.state.position.split(',')
     i = [parseInt(i[0]), parseInt(i[1])]
-    console.log(i)
+    // console.log(i)  //[1,0]
     let top = this.card_data[i[0]][(i[1]-1)]
 
     let e = parseInt(this.card_data[i[0]][i[1]+1])
@@ -51,6 +50,7 @@ class ByName extends React.Component{
     let w = parseInt(this.card_data[i[0]][i[1]+4])
     let results = {'1': {empathy: e, passion:p, stamina:s, wisdom:w}}
 
+    //names at index 1,9,17,25,33,41,49
     const memberhash ={'1': 'Jin' , '9':'Suga' , '17':'J-Hope', '25':'RM', '33':'Jimin', '41':'V', '49':'Jungkook'}
 
     let mult, stars
@@ -80,11 +80,11 @@ class ByName extends React.Component{
 
     results['30'][top]+= (mult[1]-mult[0])*29
     results['50'][top]+= (mult[1]-mult[0])*49
-    console.log(results)
+    // console.log(results)
     this.reslist[top].push(<ResultsTable results={results} card={this.card_data[i[0]][i[1]]} stars = {stars} member={member}/>)
-    this.setState({results:this.reslist.length})
+    this.setState({results:this.state.results+1})
 
-    console.log(this.state)
+    // console.log(this.state)
 
   }
 
@@ -94,15 +94,13 @@ class ByName extends React.Component{
     )
   }
 
-  returnData = () =>{
-    return this.state.card_data
-  }
-
   render(){
     return(
-      <div id='calc'>
-        <CardNameForm handler={this.handleChange} calculate={this.calculate} data={this.state.card_data}/>
+      <div>
+        <h4>Calculate level 30 and 50 stats for any 3-5 star card.</h4>
 
+        <CardNameForm handler={this.handleChange} calculate={this.calculate} data={this.state.card_data}/>
+        <p>Tip: Select input field and start typing name of card</p>
         <div className='col'>
           <p>Empathy</p>
           {this.renderResults('empathy')}
