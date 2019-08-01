@@ -1,23 +1,34 @@
 import React from 'react'
-import main_story from '../main-story.csv'
-import Papa from 'papaparse'
 
 class LevelForm extends React.Component{
 
+  data = []
+
   componentDidMount(){
-    this.fetchCsv()
+    // this.extractNames()
   }
 
-  fetchCsv() {
-    Papa.parse(main_story, {
-        // header: true,
-        download: true,
-        skipEmptyLines: true,
-        complete: function(results) {
-          console.log(results.data[1]);
+  extractNames = () =>{
+    let alldata = this.props.data  //main story data
+    if (alldata.length > 0){
+      for ( let i = 65 ; i <= 78  ; i++){
+        if (![11,22,35,49,64].includes(i)){
+          this.data.push([alldata[i][0], alldata[i][2]])
         }
       }
-    )
+    }
+    console.log(this.data)
+  }
+
+  renderOptions = () =>{
+    this.extractNames()
+    // console.log(this.data)
+    let options =[]
+    // Object.keys(this.data).map( (key) => {
+    //   // console.log(this.data[key])
+    //   // options.push(<option value={this.data[key]}>{key}</option>)
+    // })
+    return options
   }
 
   render(){
@@ -25,6 +36,13 @@ class LevelForm extends React.Component{
       <div>
 
         <p>LEVEL FORM</p>
+        <div>
+          <label>Card Name: </label>
+          <select name='position' onChange={e => this.props.handler(e)}>
+            {this.renderOptions()}
+          </select>
+        </div>
+
       </div>
 
     )
