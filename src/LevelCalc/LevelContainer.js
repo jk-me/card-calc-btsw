@@ -12,6 +12,7 @@ class ByName extends React.Component{
   state = {
       name: "You're Quite Handsome",
       position:'1,1',
+      levelrow: 65,  //level 6-1
       results:0,
       card_data:[],
       story_data:[]
@@ -37,9 +38,7 @@ class ByName extends React.Component{
 
   fetchStoryData() {
     Papa.parse(main_story, {
-        // header: true,
         download: true,
-        // skipEmptyLines: true,
         complete: (results) => {
           this.setState({story_data: results.data})
           console.log(this.state.story_data);
@@ -114,7 +113,7 @@ class ByName extends React.Component{
     return(
       <div>
         <h4>Calculate level 30 and 50 stats for any 3-5 star card.</h4>
-        <LevelForm data={this.state.story_data}/>
+        <LevelForm data={this.state.story_data} handler={this.handleChange}/>
         <CardNameForm handler={this.handleChange} calculate={this.calculate} data={this.state.card_data}/>
         <p>Tip: Select input field and start typing name of card</p>
 

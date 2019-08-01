@@ -11,23 +11,21 @@ class LevelForm extends React.Component{
   extractNames = () =>{
     let alldata = this.props.data  //main story data
     if (alldata.length > 0){
-      for ( let i = 65 ; i <= 78  ; i++){
+      for ( let i = 1 ; i <= 78  ; i++){
         if (![11,22,35,49,64].includes(i)){
-          this.data.push([alldata[i][0], alldata[i][2]])
+          this.data.push([i,alldata[i][0], alldata[i][2]])
         }
       }
     }
-    console.log(this.data)
   }
 
   renderOptions = () =>{
     this.extractNames()
-    // console.log(this.data)
+    console.log(this.data)
     let options =[]
-    // Object.keys(this.data).map( (key) => {
-    //   // console.log(this.data[key])
-    //   // options.push(<option value={this.data[key]}>{key}</option>)
-    // })
+    this.data.map( el => {
+      options.push(<option value={el[0]}>{el[1]}-{el[2]}</option>)
+  })
     return options
   }
 
@@ -37,8 +35,8 @@ class LevelForm extends React.Component{
 
         <p>LEVEL FORM</p>
         <div>
-          <label>Card Name: </label>
-          <select name='position' onChange={e => this.props.handler(e)}>
+          <label>Level: </label>
+          <select name='levelrow' onChange={e => this.props.handler(e)}>
             {this.renderOptions()}
           </select>
         </div>
