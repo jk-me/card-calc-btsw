@@ -2,9 +2,9 @@ import React from 'react'
 import card_stats from '../cardbasestats.csv'
 import main_story from '../main-story.csv'
 
-
 import Papa from 'papaparse'
 import LevelForm from './LevelForm'
+import LevelTable from './LevelTable'
 import CardNameForm from '../ByName/CardNameForm'
 import ResultsTable from '../Calculator/ResultsTable'
 
@@ -12,7 +12,7 @@ class ByName extends React.Component{
   state = {
       name: "You're Quite Handsome",
       position:'1,1',
-      levelrow: 65,  //level 6-1
+      levelrow: 74,  //level 6-1
       level:{
         total: 0,
         empathy: 50,
@@ -123,6 +123,14 @@ class ByName extends React.Component{
     )
   }
 
+  renderLevelTable = () =>{
+    if (this.state.story_data[this.state.levelrow]){
+      return(
+        <LevelTable data={this.state.story_data[this.state.levelrow]}/>
+      )
+    }
+  }
+
   render(){
     return(
       <div>
@@ -130,7 +138,7 @@ class ByName extends React.Component{
         <LevelForm data={this.state.story_data} handler={this.handleLevelChange}/>
         <CardNameForm handler={this.handleChange} calculate={this.calculate} data={this.state.card_data} level='true'/>
         <p>Tip: Select input field and start typing name of card</p>
-
+        {this.renderLevelTable()}
 
 
       </div>
