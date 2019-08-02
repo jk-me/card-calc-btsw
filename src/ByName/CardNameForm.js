@@ -35,6 +35,16 @@ class CardNameForm extends React.PureComponent{
     return options
   }
 
+  renderLevel = () =>{
+    if (this.props.level){
+      return(
+        <div>
+          <label>Card Level: </label>
+          <input name='cardlvl' type='text' onChange={e => this.props.handler(e) }></input>
+        </div>
+      )
+    }
+  }
 
   render(){
     return(
@@ -46,6 +56,8 @@ class CardNameForm extends React.PureComponent{
             {this.renderOptions()}
           </select>
         </div>
+
+        {this.renderLevel()}
 
         <button onClick={this.props.calculate}>Calculate</button>
 
