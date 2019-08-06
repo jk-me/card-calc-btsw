@@ -57,6 +57,7 @@ class ByName extends React.Component{
 
   handleLevelChange = (event) =>{
     console.log(this.state.story_data[event.target.value])
+    this.reslist = []
     this.setState({
       [event.target.name]:event.target.value, //levelrow
       level: {
@@ -142,7 +143,27 @@ class ByName extends React.Component{
         <p>Tip: Select input field and start typing name of card</p>
         {this.renderLevelTable()}
         <p></p>
-        {this.renderResults()}
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Card</th>
+                <th>Total Score</th>
+                <th>Level</th>
+                <th>Empathy</th>
+                <th>Passion</th>
+                <th>Stamina</th>
+                <th>Wisdom</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderResults()}
+            </tbody>
+          </table>
+        </div>
+
+
 
       </div>
 
