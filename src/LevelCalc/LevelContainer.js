@@ -13,7 +13,7 @@ class ByName extends React.Component{
       name: "You're Quite Handsome",
       position:'1,1',
       cardlvl: 1,
-      levelrow: 74,  //level 6-1
+      levelrow: 78,  //level 6-1
       level:{
         total: 0,
         empathy: 50,
@@ -137,10 +137,10 @@ class ByName extends React.Component{
   render(){
     return(
       <div>
-        <h4>Calculate level 30 and 50 stats for any 3-5 star card.</h4>
+        <h4>Calculate the effective score of a card for any level. (3-5&#9733; only)</h4>
         <LevelForm data={this.state.story_data} handler={this.handleLevelChange}/>
         <CardNameForm handler={this.handleCardChange} calculate={this.calculate} data={this.state.card_data} level='true'/>
-        <p>Tip: Select input field and start typing name of card</p>
+        <p>Tip: Select card name field and start typing name</p>
         {this.renderLevelTable()}
         <p></p>
         <div>

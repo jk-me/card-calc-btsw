@@ -23,7 +23,7 @@ class LevelForm extends React.Component{
     this.extractNames()
     // console.log(this.data)
     let options =[]
-    this.data.map( el => {
+    this.data.reverse().map( el => {
       options.push(<option value={el[0]}>{el[1]}-{el[2]}</option>)
   })
     return options
