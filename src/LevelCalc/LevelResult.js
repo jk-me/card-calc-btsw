@@ -1,20 +1,18 @@
 import React from 'react'
 
-const LevelResult = props =>{
+const LevelResult = ( {results, stars, card, member} )=>{
   return(
     <tr>
       <td>
-        <span>{props.stars} &#9733; {props.member}: {props.card}</span>
+        <span>{stars} &#9733; {member}: {card}</span>
       </td>
-      <td>{props.results.total}</td>
-      <td>{props.results.lvl}</td>
-      <td className='emp'>{props.results.empathy}</td>
-      <td className='pas'>{props.results.passion}</td>
-      <td className='sta'>{props.results.stamina}</td>
-      <td className='wis'>{props.results.wisdom}</td>
-
+      <td>{results.total}</td>
+      <td>{results.lvl}</td>
+      <td className='emp'>{results.empathy}</td>
+      <td className='pas'>{results.passion}</td>
+      <td className='sta'>{results.stamina}</td>
+      <td className='wis'>{results.wisdom}</td>
     </tr>
-
   )
 }
 
