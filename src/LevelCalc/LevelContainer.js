@@ -13,7 +13,7 @@ class ByName extends React.Component{
       name: "You're Quite Handsome",
       position:'1,1',
       cardlvl: 1,
-      levelrow: 78,  //level 6-1
+      levelrow: 92,  //level 7-19
       level:{
         total: 0,
         empathy: 50,
